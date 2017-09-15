@@ -31,6 +31,22 @@ export default (state = initialState, action) => {
       });
     }
 
+    case "EDITING_POST": {
+      return update(state, {
+        post: {
+          $merge: {
+            [action.name]: action.value
+          }
+        }
+      });
+    }
+
+    case "DESTROY_POST_SUCCESS": {
+      return Object.assign({}, state, {
+        post: {}
+      });
+    }
+
     default: {
       return state;
     }

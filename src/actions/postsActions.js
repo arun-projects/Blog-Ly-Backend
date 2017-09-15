@@ -42,6 +42,16 @@ export const newPostTyping = (event) => {
   }
 }
 
+export const editPostTyping = (event) => {
+  return (dispatch) => {
+    dispatch({
+      type: "EDITING_POST",
+      name: event.target.name,
+      value: event.target.value
+    });
+  }
+}
+
 export const submitPost = (newPost, cb) => {
   return (dispatch) => {
     backend.request({
@@ -54,6 +64,44 @@ export const submitPost = (newPost, cb) => {
       dispatch({
         type: "SUBMIT_POST_SUCCESS",
         payload: response.data
+      });
+
+      cb();
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+}
+
+export const submitEditPost = (editPost, id, cb) => {
+  return (dispatch) => {
+    backend.request({
+      url: `/posts/${id}`,
+      method: "PUT",
+      data: {
+        post: editPost
+      }
+    }).then((response) => {
+      dispatch({
+        type: "UPDATE_POST_SUCCESS",
+        payload: response.data
+      });
+
+      cb();
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+}
+
+export const destroyPost = (id, cb) => {
+  return (dispatch) => {
+    backend.request({
+      url: `/posts/${id}`,
+      method: "DELETE"
+    }).then(() => {
+      dispatch({
+        type: "DESTROY_POST_SUCCESS"
       });
 
       cb();

@@ -16,6 +16,7 @@ import "./styles/style.scss";
 import PostsContainer from "./containers/PostsContainer";
 import ShowPostContainer from "./containers/ShowPostContainer";
 import NewPost from "./components/NewPost";
+import EditPostContainer from "./containers/EditPostContainer";
 
 ReactDom.render(
   <Provider store={store}>
@@ -25,6 +26,7 @@ ReactDom.render(
         <Route exact path="/posts" component={PostsContainer} />
         <Route exact path="/posts/new" component={NewPost} />
         <Route exact path="/posts/:id" component={ShowPostContainer} />
+        <Route exact path="/posts/:id/edit" component={EditPostContainer} />
       </Switch>
     </Router>
   </Provider>

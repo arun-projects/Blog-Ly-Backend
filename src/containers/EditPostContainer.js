@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import * as Actions from "../actions";
-import OnePost from "../components/OnePost";
+import EditPost from "../components/EditPost";
 
-class ShowPostContainer extends Component {
+class EditPostContainer extends Component {
   componentDidMount() {
     this.props.dispatch(
       Actions
@@ -15,7 +15,7 @@ class ShowPostContainer extends Component {
 
   render() {
     return (
-      <OnePost post={this.props.state.post} history={this.props.history} />
+      <EditPost post={this.props.state.post} id={this.props.match.params.id} history={this.props.history} />
     );
   }
 }
@@ -32,4 +32,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowPostContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(EditPostContainer);

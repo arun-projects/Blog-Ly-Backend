@@ -1,8 +1,27 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
+import * as Actions from "../actions";
 import Nav from "./Nav";
 
 class OnePost extends Component {
+  handleDestroy(event) {
+    event.preventDefault();
+
+    const confirmDelete = confirm("Are you sure you want to delete this post?");
+
+    if (confirmDelete) {
+      this.props.dispatch(
+        Actions.postsActions.destroyPost(this.props.post._id, () => {
+          this.props.history.push("/posts");
+        })
+      );
+    } else {
+      return;
+    }
+  }
+
   render() {
     return (
       <div>
@@ -13,6 +32,16 @@ class OnePost extends Component {
             <div className="row">
                 <div className="col-lg-8">
                     <h1>{this.props.post.title}</h1>
+
+                    <div className="margin-top-20">
+                      <Link className="btn btn-primary" to={`/posts/${this.props.post._id}/edit`}>
+                        <span className="glyphicon glyphicon-pencil"></span> Edit
+                      </Link>
+
+                      <a onClick={this.handleDestroy.bind(this)} className="btn btn-danger margin-left-10" href="#">
+                        <span className="glyphicon glyphicon-trash"></span> Delete
+                      </a>
+                    </div>
 
                     <hr />
 
@@ -50,4 +79,16 @@ class OnePost extends Component {
   }
 }
 
-export default OnePost;
+const mapStateToProps = (state) => {
+  return {
+    state: state.posts
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: dispatch
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OnePost);
