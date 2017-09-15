@@ -56,6 +56,18 @@ Response:
 }
 ```
 
+### PUT /posts/:id
+
+Response:
+
+- Response Code: 200
+
+### DELETE /posts/:id
+
+Response:
+
+- Response Code: 200
+
 > Note: The frontend is expecting the ID to be in the MongoDB format of "_id". If you need this to be something else you will need to change the source React project.
 
 - **Bonus:** Use integration tests to develop your API TDD style.
