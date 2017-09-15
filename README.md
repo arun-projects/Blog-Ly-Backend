@@ -42,6 +42,18 @@ Response:
 
 ### POST /posts
 
+Sample Request:
+
+```json
+{
+    "post": {
+        "title": "My title",
+        "post_text": "My post text",
+        "post_image": "Image link here"
+    }
+}
+```
+
 Response:
 
 - Response Code: 201
@@ -50,13 +62,25 @@ Response:
 ```json
 {
     "_id": "59baf81b4b08ecce0e3bc73e",
-    "title": "My Title",
+    "title": "My title",
     "post_text": "My post text",
-    "post_image": "image link here"
+    "post_image": "Image link here"
 }
 ```
 
 ### PUT /posts/:id
+
+Sample Request:
+
+```json
+{
+    "post": {
+        "title": "Updated title",
+        "post_text": "Updated post text",
+        "post_image": "Updated image link here"
+    }
+}
+```
 
 Response:
 
